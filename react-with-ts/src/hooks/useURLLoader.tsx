@@ -6,8 +6,10 @@ const useURLLoader = (url: string, deps: any[] = []) => {
     const [data, setData] = useState<any>(null)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
+        console.log('urlloader effect')
         setLoading(true)
         axios.get(url).then(result => {
+            console.log('fetch success')
             setData(result.data)
             setLoading(false)
         })

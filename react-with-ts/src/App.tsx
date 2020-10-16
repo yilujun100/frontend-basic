@@ -37,10 +37,10 @@ const themes: IThemeProps = {
 export const ThemeContext = React.createContext(themes.light)
 function App() {
   const [show, setShow] = useState(true)
-  // const positions = useMousePosition()
-  // const WrappedDogShow = withLoader(DogShow, 'https://dog.ceo/api/breeds/image/random')
-  const [data, loading] = useURLLoader('https://dog.ceo/api/breeds/image/random', [show])
-  const dogResult = data as IShowResult
+//   const positions = useMousePosition()
+//   const WrappedDogShow = withLoader(DogShow, 'https://dog.ceo/api/breeds/image/random')
+//   const [data, loading] = useURLLoader('https://dog.ceo/api/breeds/image/random', [show])
+//   const dogResult = data as IShowResult
   return (
     <div className="App">
       <ThemeContext.Provider value={themes.dark}>
@@ -58,8 +58,8 @@ function App() {
         <p>
           <button onClick={() => {setShow(!show)}}>Refresh dog photo</button>
         </p>
-        { loading ? <p>🐶 读取中</p>
-          : <img src={dogResult && dogResult.message} /> }
+        {/* { loading ? <p>🐶 读取中</p>
+          : <img src={dogResult && dogResult.message} /> } */}
         <a
           className="App-link"
           href="https://reactjs.org"
