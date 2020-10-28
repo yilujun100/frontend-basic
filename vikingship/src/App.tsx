@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import Button, { ButtonType, ButtonSize } from './components/Button/Button'
+import Button, { ButtonType, ButtonSize } from './components/Button/button'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
