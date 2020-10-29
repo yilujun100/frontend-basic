@@ -3,6 +3,8 @@ import { withInfo } from '@storybook/addon-info'
 import { addDecorator, addParameters } from '@storybook/react'
 // 引入样式文件
 import '../src/styles/index.scss';
+// fix info style
+import './fix_info_style.scss';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

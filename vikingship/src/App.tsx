@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import Button, { ButtonType, ButtonSize } from './components/Button/button'
+import Button from './components/Button/button'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
@@ -26,11 +26,11 @@ function App() {
 				</Menu>
 				<Button onClick={(e) => {e.preventDefault(); alert(123);}}>Hello</Button>
 				<Button disabled>Disabled Button</Button>
-				<Button btnType={ButtonType.Primary} size={ButtonSize.Large}>Hello</Button>
-				<Button btnType={ButtonType.Danger} size={ButtonSize.Small}>Hello</Button>
-				<Button btnType={ButtonType.Link} href="http://baidu.com">Baidu Link</Button>
-				<Button btnType={ButtonType.Link} href="http://baidu.com" disabled>Baidu Link</Button>
-                <Button size={ButtonSize.Large} onClick={() => {setShow(!show)}}>Toggle</Button>
+				<Button btnType="primary" size="lg">Hello</Button>
+				<Button btnType="danger" size="sm">Hello</Button>
+				<Button btnType="link" href="http://baidu.com">Baidu Link</Button>
+				<Button btnType="link" href="http://baidu.com" disabled>Baidu Link</Button>
+                <Button size="lg" onClick={() => {setShow(!show)}}>Toggle</Button>
 				<Transition
 					in={show}
 					timeout={300}
@@ -57,8 +57,16 @@ function App() {
 					animation="zoom-in-left"
 					wrapper
 				>
-					<Button btnType={ButtonType.Primary} size={ButtonSize.Large}>A Large Button</Button>
+					<Button btnType="primary" size="lg">A Large Button</Button>
 				</Transition>
+                <a
+                    className="App-link"
+                    href="https://reactjs.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Learn React
+                </a>
             </header>
         </div>
     )
