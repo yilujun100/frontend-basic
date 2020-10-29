@@ -1,6 +1,9 @@
 import React from 'react'
 import { withInfo } from '@storybook/addon-info'
 import { addDecorator, addParameters } from '@storybook/react'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas)
 // 引入样式文件
 import '../src/styles/index.scss';
 // fix info style
