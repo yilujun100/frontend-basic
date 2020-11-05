@@ -46,7 +46,7 @@ const SimpleComplete = () => {
         return (
             <>
                 <h2>Name: {itemWithGithub.value}</h2>
-                <p>Url: {itemWithGithub.url}</p>
+                {/* <p>Url: {itemWithGithub.url}</p> */}
             </>
         )
     }
