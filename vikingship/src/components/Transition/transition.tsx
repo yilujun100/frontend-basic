@@ -30,4 +30,4 @@ Transition.defaultProps = {
     appear: true
 }
 
-export default Transition
+export default Transition;

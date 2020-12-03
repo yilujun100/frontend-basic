@@ -102,7 +102,7 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
     }
     const generateDroopDown = () => {
         return (
-            <ul>
+            <ul className="viking-suggestion-list">
                 {
                     suggestions.map((item, index) => {
                         const cnames = classNames('suggestion-item', {
