@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 手机拍照后 读取文件显示到桌面上 -->
+    <div id="drag" style="width: 200px; height: 200px; background: red;"></div>
+    <script>
+        drag.addEventListener('dragover', e => {
+            e.preventDefault();
+        });
+        drag.addEventListener('drop', e => {
+            e.preventDefault();
+            let fr = new FileReader();
+            fr.readAsDataURL(e.dataTransfer.files[0]);
+            fr.onload = function (e) {
+                let img = new Image();
+                img.src = e.target.result;
+                document.body.appendChild(img);
+            };
+        });
+    </script>
+</body>
+
+</html>
