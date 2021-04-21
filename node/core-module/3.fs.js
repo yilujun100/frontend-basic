@@ -51,7 +51,7 @@ mkdir('a/b/c/d/e/f', function () {
 }); */
 
 // 递归删除目录（异步实现）
-function preDeep(dir, callback) {
+/* function preDeep(dir, callback) {
 	fs.stat(dir, function (err, statObj) {
 		if (statObj.isFile()) {
 			// 是文件直接删除即可
@@ -71,5 +71,61 @@ function preDeep(dir, callback) {
 	});
 }
 preDeep('a', function () {
+	console.log('删除成功');
+}); */
+
+// 并行删除
+/* function preParallelDeep(dir, callback) {
+	fs.stat(dir, function (err, statObj) {
+		if (statObj.isFile()) {
+			fs.unlink(dir, callback);
+		} else {
+			fs.readdir(dir, function (err, dirs) {
+				let index = 0;
+				dirs = dirs.map(item => path.join(dir, item));
+				if (dirs.length === 0) return fs.rmdir(dir, callback);
+				function done() {
+					if (++index === dirs.length) return fs.rmdir(dir, callback);
+				}
+				dirs.forEach(dir => {
+					preParallelDeep(dir, done);
+				});
+			});
+		}
+	});
+} */
+
+// promise
+/* function preParallelDeep(dir) {
+	return new Promise((resolve, reject) => {
+		fs.stat(dir, function (err, statObj) {
+			if (statObj.isFile()) {
+				fs.unlink(dir, resolve);
+			} else {
+				fs.readdir(dir, function (err, dirs) {
+					dirs = dirs.map(item => preParallelDeep(path.join(dir, item)));
+					Promise.all(dirs).then(() => {
+						fs.rmdir(dir, resolve);
+					});
+				});
+			}
+		});
+	});
+} */
+
+// async + await
+const { unlink, readdir, stat, rmdir } = require('fs').promises;
+async function preParallelDeep(dir) {
+	let statObj = await stat(dir);
+	if (statObj.isFile()) {
+		await unlink(dir);
+	} else {
+		let dirs = await readdir(dir);
+		dirs = dirs.map(item => preParallelDeep(path.join(dir, item)));
+		await Promise.all(dirs);
+		await rmdir(dir);
+	}
+}
+preParallelDeep('a').then(() => {
 	console.log('删除成功');
 });
