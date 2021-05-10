@@ -8,6 +8,7 @@
         </ul>
         <h1>{{person.name}}</h1> -->
         <h1>{{greetings}}</h1>
+        <h1>X: {{x}}, Y: {{y}}</h1>
         <button @click="increase">+1</button><br/>
         <button @click="updateGreetings">Update Title</button>
     </div>
@@ -15,6 +16,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, reactive, toRefs, onMounted, onUnmounted, onUpdated, onRenderTriggered, watch } from 'vue'
+import useMousePosition from './hooks/useMousePosition'
 interface DataProps {
     count: number;
     double: number;
@@ -59,12 +61,19 @@ export default defineComponent({
         console.log('oldVal: ', oldValue)
         document.title = 'updated' + greetings.value + data.count
     })
+    // 相比mixin优点：
+    // 1.很清楚x,y来源
+    // 2.可以给x,y设置别名，这样就避免了命名冲突的风险
+    // 3.这部分逻辑可以脱离组件存在, 实现逻辑的复用
+    const { x, y } = useMousePosition()
     const refData = toRefs(data)
 
     return {
         ...refData,
         greetings,
-        updateGreetings
+        updateGreetings,
+        x,
+        y
     }
   }
 })
