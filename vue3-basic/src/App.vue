@@ -8,21 +8,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed, reactive, toRefs } from 'vue'
+interface DataProps {
+    count: number;
+    double: number;
+    increase: () => void;
+}
 
 export default defineComponent({
   name: 'App',
   setup() { // setup方法是在data、props、computed、methods以及声明周期函数之前运行
-    const count = ref(0) // ref 返回一个响应式对象
-    const double = computed(() => count.value * 2)
-    const increase = () => {
-        count.value++
-    }
+    // const count = ref(0) // ref 返回一个响应式对象
+    // const double = computed(() => count.value * 2)
+    // const increase = () => {
+    //     count.value++
+    // }
+    const data: DataProps = reactive({
+        count: 0,
+        increase: () => { data.count++ },
+        double: computed(() => data.count * 2)
+    })
+    const refData = toRefs(data)
 
     return {
-        count,
-        double,
-        increase
+        ...refData
     }
   }
 })
