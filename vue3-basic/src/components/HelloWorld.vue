@@ -31,14 +31,27 @@
 </template>
 
 <script lang="ts">
+// vue2遇到的难题：
+// vue2对于typescript的支持非常的有限
+// vue3的defineComponent方法并没有实现任何的逻辑，它的存在是完全是为了让传入的对象获得对应的类型，
+// 也就是说完全是为了服务typescript而存在的,defineComponent能让传入的对象获得非常多的类型
 import { defineComponent } from 'vue';
-
-export default defineComponent({
+const component = defineComponent({
   name: 'HelloWorld',
   props: {
-    msg: String,
+    msg: {
+      required: true,
+      type: String
+    }
   },
-});
+  setup(props, context) {
+    // props：它可以访问组件传入的props属性,并且可以自动推论出props里面定义的类型
+    // context包含三个属性： attrs slots emit
+    // props.msg
+    // console.log(context)
+  }
+})
+export default component;
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
