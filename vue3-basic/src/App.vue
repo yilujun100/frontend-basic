@@ -9,6 +9,8 @@
         <h1>{{person.name}}</h1> -->
         <h1>{{greetings}}</h1>
         <h1>X: {{x}}, Y: {{y}}</h1>
+        <button @click="openModal">Open Modal</button><br/>
+        <modal :isOpen="modalIsOpen" @close-modal="onModalClose">My modal !!!</modal>
         <h1 v-if="loading">Loading...</h1>
         <!-- dog result -->
         <!-- <img v-if="loaded" :src="result.message" alt=""> -->
@@ -23,6 +25,7 @@
 import { defineComponent, ref, computed, reactive, toRefs, onMounted, onUnmounted, onUpdated, onRenderTriggered, watch } from 'vue'
 import useMousePosition from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
+import Modal from './components/Modal.vue'
 interface DataProps {
     count: number;
     double: number;
@@ -43,6 +46,9 @@ interface CatResult {
 
 export default defineComponent({
   name: 'App',
+  components: {
+      Modal
+  },
   setup() { // setup方法是在data、props、computed、methods以及声明周期函数之前运行
     // const count = ref(0) // ref 返回一个响应式对象
     // const double = computed(() => count.value * 2)
@@ -91,6 +97,13 @@ export default defineComponent({
         }
     })
     const refData = toRefs(data)
+    const modalIsOpen = ref(false)
+    const openModal = () => {
+      modalIsOpen.value = true
+    }
+    const onModalClose = () => {
+      modalIsOpen.value = false
+    }
 
     return {
         ...refData,
@@ -100,7 +113,10 @@ export default defineComponent({
         y,
         result,
         loading,
-        loaded
+        loaded,
+        modalIsOpen,
+        openModal,
+        onModalClose
     }
   }
 })
