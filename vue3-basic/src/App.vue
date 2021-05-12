@@ -9,6 +9,18 @@
         <h1>{{person.name}}</h1> -->
         <h1>{{greetings}}</h1>
         <h1>X: {{x}}, Y: {{y}}</h1>
+        <p>{{error}}</p>
+        <Suspense>
+            <template #default>
+                <div>
+                    <async-show/>
+                    <dog-show/>
+                </div>
+            </template>
+            <template #fallback>
+                <h1>Loading...</h1>
+            </template>
+        </Suspense>
         <button @click="openModal">Open Modal</button><br/>
         <modal :isOpen="modalIsOpen" @close-modal="onModalClose">My modal !!!</modal>
         <h1 v-if="loading">Loading...</h1>
@@ -22,10 +34,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, reactive, toRefs, onMounted, onUnmounted, onUpdated, onRenderTriggered, watch } from 'vue'
+import { defineComponent, ref, computed, reactive, toRefs, onMounted, onUnmounted, onUpdated, onRenderTriggered, watch, onErrorCaptured } from 'vue'
 import useMousePosition from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
 import Modal from './components/Modal.vue'
+import AsyncShow from './components/AsyncShow.vue'
+import DogShow from './components/DogShow.vue'
 interface DataProps {
     count: number;
     double: number;
@@ -47,7 +61,9 @@ interface CatResult {
 export default defineComponent({
   name: 'App',
   components: {
-      Modal
+      Modal,
+      AsyncShow,
+      DogShow
   },
   setup() { // setup方法是在data、props、computed、methods以及声明周期函数之前运行
     // const count = ref(0) // ref 返回一个响应式对象
@@ -64,6 +80,11 @@ export default defineComponent({
     onRenderTriggered(event => {
         console.log(event)
     }) */
+    const error = ref(null)
+    onErrorCaptured((e: any) => { // 捕获Suspense包裹下的组件的错误
+        error.value = e
+        return true
+    })
     const data: DataProps = reactive({
         count: 0,
         increase: () => { data.count++ },
@@ -116,7 +137,8 @@ export default defineComponent({
         loaded,
         modalIsOpen,
         openModal,
-        onModalClose
+        onModalClose,
+        error
     }
   }
 })
