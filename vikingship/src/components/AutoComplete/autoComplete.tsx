@@ -109,6 +109,7 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
     const handleSelect = (item: DataSourceType) => {
         setInputValue(item.value)
         setSuggestions([])
+        setShowDropdown(false)
         if (onSelect) {
             onSelect(item)
         }
