@@ -1,0 +1,50 @@
+.viking-upload-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.viking-upload-list-item {
+    position: relative;
+    margin-top: 5px;
+    min-width: 200px;
+    line-height: 1.8;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all .5s cubic-bezier(.55,0,.1,1);
+    &:first-child {
+        margin-top: 10px;
+    }
+    .file-name {
+        margin-left: 5px;
+        margin-right: 40px;
+        svg {
+            margin-right: 5px;
+            color: $gray-500;
+        }
+    }
+    .file-name-error {
+        color: $danger;
+        svg {
+            color: $danger;
+        }
+    }
+    .file-actions {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 7px;
+        line-height: inherit;
+        cursor: pointer;
+    }
+    &:hover {
+        background-color: $gray-200;
+        .file-status {
+            display: none;
+        }
+        .file-actions {
+            display: block;
+        }
+    }
+}
