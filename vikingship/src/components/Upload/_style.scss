@@ -4,6 +4,24 @@
     list-style-type: none;
 }
 
+.viking-uploader-dragger {
+    padding: 20px;
+    width: 360px;
+    height: 180px;
+    text-align: center;
+    border: 1px dashed $gray-300;
+    background: $gray-100;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+        border: 1px dashed $primary;
+    }
+    &.is-dragover {
+        border: 2px dashed $primary;
+        background: rgba($primary, .2);
+    }
+}
+
 .viking-upload-list-item {
     position: relative;
     margin-top: 5px;
