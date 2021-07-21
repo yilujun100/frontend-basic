@@ -1,64 +1,84 @@
 {
-  "name": "vikingship",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@fortawesome/react-fontawesome": "^0.1.12",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/classnames": "^2.2.10",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-transition-group": "^4.4.0",
-    "@types/storybook__addon-info": "^5.2.3",
-    "axios": "^0.21.1",
-    "classnames": "^2.2.6",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.4",
-    "react-transition-group": "^4.4.1",
-    "typescript": "~3.7.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "name": "vikingship",
+    "version": "0.1.0",
+    "description": "React components library",
+    "author": "yilujun100",
+    "private": false,
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "license": "MIT",
+    "keywords": [
+        "Component",
+        "UI",
+        "React"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@storybook/addon-actions": "^6.0.27",
-    "@storybook/addon-essentials": "^6.0.27",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.0.27",
-    "@storybook/node-logger": "^6.0.27",
-    "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.0.27",
-    "babel-loader": "^8.1.0",
-    "react-docgen-typescript-loader": "^3.7.2",
-    "react-is": "^17.0.1"
-  }
+    "homepage": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yilujun100/frontend-basic/tree/master/vikingship"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.32",
+        "@fortawesome/free-solid-svg-icons": "^5.15.1",
+        "@fortawesome/react-fontawesome": "^0.1.12",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "@types/classnames": "^2.2.10",
+        "@types/jest": "^24.0.0",
+        "@types/node": "^12.0.0",
+        "@types/react": "^16.9.53",
+        "@types/react-dom": "^16.9.8",
+        "@types/react-transition-group": "^4.4.0",
+        "@types/storybook__addon-info": "^5.2.3",
+        "axios": "^0.21.1",
+        "classnames": "^2.2.6",
+        "node-sass": "^4.14.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-scripts": "3.4.4",
+        "react-transition-group": "^4.4.1",
+        "typescript": "~3.7.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "clean": "rimraf ./dist",
+        "build": "npm run clean && npm run build-ts && npm run build-css",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "build-ts": "tsc -p tsconfig.build.json",
+        "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
+        "storybook": "start-storybook -p 6006 -s public",
+        "build-storybook": "build-storybook -s public"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.3",
+        "@storybook/addon-actions": "^6.0.27",
+        "@storybook/addon-essentials": "^6.0.27",
+        "@storybook/addon-info": "^5.3.21",
+        "@storybook/addon-links": "^6.0.27",
+        "@storybook/node-logger": "^6.0.27",
+        "@storybook/preset-create-react-app": "^3.1.4",
+        "@storybook/react": "^6.0.27",
+        "babel-loader": "^8.1.0",
+        "react-docgen-typescript-loader": "^3.7.2",
+        "react-is": "^17.0.1",
+        "rimraf": "^3.0.2"
+    }
 }

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
 import { render, RenderResult, fireEvent, wait, createEvent } from '@testing-library/react'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
+// import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import React from 'react'
 import axios from 'axios'
 import { Upload, UploadProps } from './upload'
@@ -8,9 +8,9 @@ import { Upload, UploadProps } from './upload'
 const mockedAxios = axios as jest.Mocked<typeof axios>
 jest.mock('axios')
 
-type MockIconProps = { icon: IconProp; onClick: () => void; }
+// type MockIconProps = { icon: IconProp; onClick: () => void; }
 jest.mock('../Icon/icon', () => (
-    ({ icon, onClick }: MockIconProps) => {
+    ({ icon, onClick }) => {
         return <span onClick={onClick}>{icon}</span>
     }
 ))
