@@ -90,7 +90,7 @@ const AsyncFetch = () => {
     )
 }
 
-storiesOf('AutoComplete Component', module)
+storiesOf('AutoComplete', module)
     .add('AutoComplete', SimpleComplete)
     .add('自定义下拉选项', CustomDropdownOptions)
     .add('异步请求Github用户名', AsyncFetch)

@@ -63,7 +63,7 @@ const pandInput = () => (
 )
 
 
-storiesOf('Input component', module)
+storiesOf('Input', module)
   .add('Input', defaultInput)
   .add('被禁用的 Input', disabledInput)
   .add('带图标的 Input', iconInput)

@@ -62,7 +62,7 @@ const defaultOpenSubMenu = () => (
     </Menu>
 )
 
-storiesOf('Menu Component', module)
+storiesOf('Menu', module)
     .add('Menu', defaultMenu)
     .add('纵向的 Menu', verticalMenu)
     .add('默认展开的纵向 Menu', defaultOpenSubMenu)

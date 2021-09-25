@@ -24,12 +24,14 @@ export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
     /**点击选中建议项时触发的回调 */
     onSelect?: (item: DataSourceType) => void;
     /**支持自定义渲染下拉项，返回 ReactElement */
-    renderOption?: (item: DataSourceType) => ReactElement
+    renderOption?: (item: DataSourceType) => ReactElement;
 }
 /**
  * 输入框自动完成功能。当输入值需要自动完成时使用，支持同步和异步两种方式 支持 Input 组件的所有属性 支持键盘事件选择
+ * ### 引用方法
+ *
  * ~~~js
- * import { AutoComplete } from 'vikingship'
+ * import { AutoComplete } from 'vikingship-ui'
  * ~~~
  */
 export const AutoComplete: FC<AutoCompleteProps> = props => {
@@ -51,6 +53,7 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
     useClickOutside(componentRef, () => { setSuggestions([]) })
     useEffect(() => {
         if (debouncedValue && triggerSearch.current) {
+            setSuggestions([])
             const results = fetchSuggestions(debouncedValue)
             if (results instanceof Promise) {
                 // console.log('triggered')
@@ -70,7 +73,7 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
                 }
             }
         } else {
-            setSuggestions([])
+            setShowDropdown(false)
         }
         setHighlightIndex(-1)
     }, [debouncedValue, fetchSuggestions])
@@ -95,7 +98,7 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
                 highlight(highlightIndex + 1)
                 break
             case 27:
-                setSuggestions([])
+                setShowDropdown(false)
                 break
             default:
                 break
@@ -108,7 +111,6 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
     }
     const handleSelect = (item: DataSourceType) => {
         setInputValue(item.value)
-        setSuggestions([])
         setShowDropdown(false)
         if (onSelect) {
             onSelect(item)
@@ -152,7 +154,7 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
                 onKeyDown={handleKeyDown}
                 {...restProps}
             />
-            {generateDropDown()}
+            {(suggestions.length > 0) && generateDropDown()}
         </div>
     )
 }

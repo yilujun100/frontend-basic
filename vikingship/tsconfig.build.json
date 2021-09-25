@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "dist",
+        "outDir": "build",
         "module": "ESNext",
         "target": "ES5",
         "declaration": true,
@@ -9,7 +9,9 @@
         "allowSyntheticDefaultImports": true
     },
     "include": [
-        "src"
+        "src/components",
+        "src/styles",
+        "src/index.tsx"
     ],
     "exclude": [
         "src/**/*.test.tsx",
