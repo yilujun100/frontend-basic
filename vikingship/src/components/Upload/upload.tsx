@@ -2,7 +2,7 @@ import React, { FC, useRef, ChangeEvent, useState } from 'react'
 import axios from 'axios'
 import UploadList from './uploadList'
 import Dragger from './dragger'
-import Button from '../Button/button'
+
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
 export interface UploadFile {
     uid: string;
@@ -15,34 +15,60 @@ export interface UploadFile {
     error?: any;
 }
 export interface UploadProps {
+    /** 必选参数, 上传的地址 */
     action: string;
+    /** 上传的文件列表 */
     defaultFileList?: UploadFile[];
-    beforeUpload?: (file: File) => boolean | Promise<File>;
+    /**
+     * 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传
+     * @param file
+     */
+    onBeforeUpload?: (file: File) => boolean | Promise<File>;
+    /** 文件上传时的钩子 */
     onProgress?: (percentage: number, file: File) => void;
+    /** 文件上传成功时的钩子 */
     onSuccess?: (data: any, file: File) => void;
+    /** 文件上传失败时的钩子 */
     onError?: (err: any, file: File) => void;
+    /** 文件状态改变时的钩子，上传成功或者失败时都会被调用 */
     onChange?: (file: File) => void;
+    /** 文件列表移除文件时的钩子 */
     onRemove?: (file: UploadFile) => void;
+    /** 设置上传的请求头部 */
     headers?: {[key: string]: any};
+    /** 上传的文件字段名 */
     name?: string;
+    /** 上传时附带的额外参数 */
     data?: {[key: string]: any};
+    /** 支持发送 cookie 凭证信息 */
     withCredentials?: boolean;
+    /** 可选参数, 接受上传的文件类型 */
     accept?: string;
+    /** 是否支持多选文件 */
     multiple?: boolean;
+    /** 是否支持拖拽上传 */
     drag?: boolean;
 }
+/**
+ * 通过点击或者拖拽上传文件
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Upload } from 'vikingship-ui'
+ * ~~~
+ */
 export const Upload: FC<UploadProps> = props => {
     const {
         action,
         defaultFileList,
-        beforeUpload,
+        onBeforeUpload,
         onProgress,
         onSuccess,
         onError,
         onChange,
         onRemove,
-        name,
         headers,
+        name,
         data,
         withCredentials,
         accept,
@@ -89,10 +115,10 @@ export const Upload: FC<UploadProps> = props => {
     const uploadFiles = (files: FileList) => {
         let postFiles = Array.from(files)
         postFiles.forEach(file => {
-            if (!beforeUpload) {
+            if (!onBeforeUpload) {
                 post(file)
             } else {
-                const result = beforeUpload(file)
+                const result = onBeforeUpload(file)
                 if (result && result instanceof Promise) {
                     result.then(processedFile => {
                         post(processedFile)
@@ -105,14 +131,14 @@ export const Upload: FC<UploadProps> = props => {
     }
     const post = (file: File) => {
         let _file: UploadFile = {
-            uid: Date.now() + 'upload-file',
+            uid: Date.now() + '_upload_file',
             status: 'ready',
             name: file.name,
             size: file.size,
             percent: 0,
             raw: file
         }
-        // setFileList([_file, ...fileList])
+        // setFileList([_file, ...fileList]) // 这个方式返回是空的
         setFileList(prevList => {
             return [_file, ...prevList]
         })
@@ -129,6 +155,7 @@ export const Upload: FC<UploadProps> = props => {
                 'Content-Type': 'multipart/form-data'
             },
             withCredentials,
+            // 上传进度计算
             onUploadProgress: e => {
                 let percentage = Math.round((e.loaded * 100) / e.total) || 0
                 if (percentage < 100) {
@@ -139,7 +166,6 @@ export const Upload: FC<UploadProps> = props => {
                 }
             }
         }).then(res => {
-            console.log('res: ', res)
             updateFileList(_file, { status: 'success', response: res.data })
             if (onSuccess) {
                 onSuccess(res.data, file)
@@ -148,7 +174,6 @@ export const Upload: FC<UploadProps> = props => {
                 onChange(file)
             }
         }).catch(err => {
-            console.log('err: ', err)
             updateFileList(_file, { status: 'error', error: err })
             if (onError) {
                 onError(err, file)
@@ -158,7 +183,7 @@ export const Upload: FC<UploadProps> = props => {
             }
         })
     }
-    console.log('fileList: ', fileList)
+
     return (
         <div
             className="viking-upload-component"
@@ -193,6 +218,6 @@ export const Upload: FC<UploadProps> = props => {
 }
 
 Upload.defaultProps = {
-    name: 'file'
+    // name: 'file'
 }
 export default Upload;

@@ -14,19 +14,23 @@ export const parameters = {
 }
 const wrapperStyle: React.CSSProperties = {
     padding: "20px 40px",
-    width: "500px",
+    // width: "500px",
 }
+// 定义内容居中的组件
 const storyWrapper = (stroyFn: any) => (
     <div style={wrapperStyle}>
         <h3>组件演示</h3>
         {stroyFn()}
     </div>
 )
+// 添加全局修饰器
 addDecorator(storyWrapper)
+// 添加显示组件信息
 addDecorator(withInfo)
+// 添加配置
 addParameters({
     info: {
-        inline: true,
-        header: false,
+        inline: true, // 直接显示信息，不需要点击图标
+        header: false // 不显示头部，比较好看
     }
 })
