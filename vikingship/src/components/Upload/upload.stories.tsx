@@ -1,5 +1,5 @@
 import React from 'react'
-import { storiesOf, addDecorator } from '@storybook/react'
+import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { Upload, UploadFile } from './upload'
 import Button from '../Button/button'

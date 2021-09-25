@@ -13,7 +13,7 @@
         "UI",
         "React"
     ],
-    "homepage": "",
+    "homepage": "http://47.98.220.220:8080/vikingship-ui/",
     "repository": {
         "type": "git",
         "url": "https://github.com/yilujun100/frontend-basic/tree/master/vikingship"
@@ -44,7 +44,7 @@
         "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
         "storybook": "start-storybook -p 6006 -s public",
         "build-storybook": "build-storybook -s public",
-        "prepublish": "npm run lint && npm run build"
+        "prepublishOnly": "npm run lint && npm run build"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -68,15 +68,15 @@
         "@types/react": "^16.9.53",
         "@types/react-dom": "^16.9.8",
         "@types/react-transition-group": "^4.4.0",
-        "@types/storybook__addon-info": "^5.2.3",
+        "@types/storybook__addon-info": "^5.2.4",
         "@babel/core": "^7.12.3",
-        "@storybook/addon-actions": "^6.1.20",
-        "@storybook/addon-essentials": "^6.1.20",
-        "@storybook/addon-info": "^5.3.21",
-        "@storybook/addon-links": "^6.1.20",
-        "@storybook/node-logger": "^6.1.20",
-        "@storybook/preset-create-react-app": "^3.1.4",
-        "@storybook/react": "^6.1.20",
+        "@storybook/addon-actions": "^6.4.0-beta.0",
+        "@storybook/addon-essentials": "^6.4.0-beta.0",
+        "@storybook/addon-info": "^6.0.0-alpha.2",
+        "@storybook/addon-links": "^6.4.0-beta.0",
+        "@storybook/node-logger": "^6.4.0-beta.0",
+        "@storybook/preset-create-react-app": "^3.2.0",
+        "@storybook/react": "^6.4.0-beta.0",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",

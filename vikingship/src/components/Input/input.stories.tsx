@@ -7,14 +7,14 @@ import { Input } from './input'
 //     return <Input value={value} defaultValue={value} onChange={(e) => {setValue(e.target.value)}}/>
 // }
 const defaultInput = () => (
-    <>
+    <div>
         <Input
             style={{width: '420px'}}
             placeholder="漂亮的 Input"
             onChange={action('changed')}
         />
         {/* <ControlledInput /> */}
-    </>
+    </div>
 )
 const disabledInput = () => (
     <Input
@@ -33,7 +33,7 @@ const iconInput = () => (
 )
 
 const sizeInput = () => (
-    <>
+    <div>
         <Input
             style={{ width: '420px' }}
             defaultValue="large size"
@@ -44,11 +44,11 @@ const sizeInput = () => (
             placeholder="small size"
             size="sm"
         />
-    </>
+    </div>
 )
 
 const pandInput = () => (
-    <>
+    <div>
         <Input
             style={{ width: '420px' }}
             defaultValue="prepend text"
@@ -59,7 +59,7 @@ const pandInput = () => (
             defaultValue="google"
             append=".com"
         />
-    </>
+    </div>
 )
 
 
